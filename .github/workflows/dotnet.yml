@@ -1,35 +1,80 @@
-name: ASP.NET Core 6.0 Example build and deploy
-  
+# 工作流名称
+name: Docker
+
 on:
-  push:
-    branches: [ "main" ]
+  #schedule:
+  #  - cron: '30 19 * * *' # 调度器
+  push: # 推送的时候触发
+    branches: [ "main" ] # 推送的分支
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
-jobs:
+env:
+  # 仓库地址
+  REGISTRY: registry.cn-hangzhou.aliyuncs.com
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: registry.cn-hangzhou.aliyuncs.com/zrng/mssql # 配置的写法 ${{ github.repository }}
 
+
+jobs:
   build:
-    runs-on: centos
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-        
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build package
-      run: dotnet publish ./NetByDocker -c Release -r linux-x64 --self-contained false -o deploy
-      
-    - name: Upload package
-      uses: garygrossgarten/github-action-scp@v0.7.3
-      with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PWD }}
-        port: 22
-        local: /home/runner/work/playground/example/deploy/
-        remote: "/home/project/example/"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # # 安装辅助工具，pr除外
+      # # https://github.com/sigstore/cosign-installer
+      # - name: Install cosign
+      #   if: github.event_name != 'pull_request'
+      #   uses: sigstore/cosign-installer@f3c664df7af409cb4873aa5068053ba9d61a57b6 #v2.6.0
+      #   with:
+      #     cosign-release: 'v1.11.0'
+
+      # # Workaround: https://github.com/docker/build-push-action/issues/461
+      # - name: Setup Docker buildx
+      #   uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
+
+      # Login against a Docker registry except on PR
+      # https://github.com/docker/login-action
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.USERMAME }} # 镜像仓库用户名
+          password: ${{ secrets.PASSWORD }} # 镜像仓库密码
+
+      # 为Docker提取元数据
+      # https://github.com/docker/metadata-action
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      # 生成和推送镜像
+      # https://github.com/docker/build-push-action
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }} #动态变量镜像TAG 使用github运行job和jobid设置tag
+          context: /home/runner/work/my-example/NetByDocker
+          file: /home/runner/work/my-example/NetByDocker/Dockerfile # 指定Dockerfile
+          
+      # 列出所有镜像    
+      - name: Docker Images Lst 
+        run: docker images
