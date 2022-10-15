@@ -16,6 +16,7 @@ env:
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   # github.repository as <account>/<repo>
   IMAGE_NAME: zrng/myexample # 配置的写法 ${{ github.repository }}
+  IMAGE_TAG: Test
 
 
 jobs:
