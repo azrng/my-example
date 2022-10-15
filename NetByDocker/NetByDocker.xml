@@ -1,0 +1,759 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetByDocker</name>
+    </assembly>
+    <members>
+        <member name="T:NetByDocker.Controllers.EfCoreSampleController">
+            <summary>
+            用户控制器(目的用于EFCore基本使用)
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Controllers.EfCoreSampleController.GetPageListAsync(NetByDocker.Model.TestManage.GetUserPageRequestTest)">
+            <summary>
+            查询用户分页列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.EfCoreSampleController.GetDetailsAsync(System.Int64)">
+            <summary>
+            查询详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.EfCoreSampleController.AddAsync(NetByDocker.Model.TestManage.AddUserVmTest)">
+            <summary>
+            添加
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.EfCoreSampleController.PutAsync(System.Int64,NetByDocker.Model.TestManage.UpdateUserVmTest)">
+            <summary>
+            修改帐号密码
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+        </member>
+        <member name="M:NetByDocker.Controllers.EfCoreSampleController.DeleteAsync(System.Int64)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:NetByDocker.Controllers.GroupController">
+            <summary>
+            班级组控制器
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Controllers.GroupController.GetGroupListAsync">
+            <summary>
+            获取班级信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.GroupController.InitAsync">
+            <summary>
+            初始化数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.TestController.GetGroupUserListAsync">
+            <summary>
+            获取组用户信息(三表连接)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NetByDocker.Controllers.UserController">
+            <summary>
+            用户控制器
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Controllers.UserController.GetPageListAsync(NetByDocker.Model.UserManage.GetUserPageRequest)">
+            <summary>
+            查询用户分页列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.UserController.GetDetailsAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            查询详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.UserController.AddAsync(NetByDocker.Model.UserManage.AddUserVm)">
+            <summary>
+            添加
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Controllers.UserController.PutAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)">
+            <summary>
+            修改帐号密码
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+        </member>
+        <member name="M:NetByDocker.Controllers.UserController.DeleteAsync(System.Int64)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:NetByDocker.Controllers.UserController.PatchAsync(System.Int64,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{NetByDocker.Model.UserManage.UpdateUserVm})">
+            <summary>
+            修改  PATCH仅指定更改
+            </summary>
+            <param name="id"></param>
+            <param name="jsonPatch"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NetByDocker.Domain.Group">
+            <summary>
+            班级表
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.Group.Name">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Domain.Score">
+            <summary>
+            成绩表
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.Score.CourseName">
+            <summary>
+            课程名称
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.Score.Grade">
+             <summary>
+            成绩
+             </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.Score.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.Score.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Domain.User">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.User.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.User.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.User.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.User.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.User.Credit">
+            <summary>
+            学分
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Domain.User.GroupId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Extensions.TokenModelBinderProvider">
+            <summary>
+            框架绑定器
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Extensions.TokenModelBinder">
+            <summary>
+            自定义模型绑定器
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Extensions.TokenModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)">
+            <summary>
+            请求里传递参数token
+            </summary>
+            <param name="bindingContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NetByDocker.Filters.CustomerActionFilter">
+            <summary>
+            本来这个类是做自定义返回类，但是如果默认情况下是开启验证的，那么你就进不来
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Infrastructure.OpenDbSend.SeedAsync(NetByDocker.Domain.OpenDbContext,Microsoft.Extensions.Logging.ILoggerFactory,System.Nullable{System.Int32})">
+            <summary>
+            生成数据库以及数据种子
+            </summary>
+            <param name="dbContext">数据库上下文</param>
+            <param name="loggerFactory">日志</param>
+            <param name="retry">重试次数</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Infrastructure.OpenDbSend.InitializeAsync(NetByDocker.Domain.OpenDbContext)">
+            <summary>
+            初始化数据
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Infrastructure.PredicateBuilderExtension.True``1">
+            <summary>
+            Linq函数应用True时：单个AND有效，多个AND有效；单个OR无效，多个OR无效；混应时写在AND后的OR有效
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Infrastructure.PredicateBuilderExtension.False``1">
+            <summary>
+            Linq函数应用False时：单个AND无效，多个AND无效；单个OR有效，多个OR有效；混应时写在OR后面的AND有效
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:NetByDocker.Model.Enum.SexEnum">
+            <summary>
+            性别枚举  0未知 1男  2女
+            </summary>
+        </member>
+        <member name="F:NetByDocker.Model.Enum.SexEnum.Noknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:NetByDocker.Model.Enum.SexEnum.Man">
+            <summary>
+            男
+            </summary>
+        </member>
+        <member name="F:NetByDocker.Model.Enum.SexEnum.WoMan">
+            <summary>
+            女
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.GradeMange.GetGroupListResponse">
+            <summary>
+            获取班级列表返回类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.GradeMange.GetGroupListResponse.GradeId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.GradeMange.GetGroupListResponse.GradeName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.GradeMange.GetGroupListResponse.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddModelVerifyTest.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddModelVerifyTest.Birthday">
+            <summary>
+            出生日期
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.TestManage.AddUserVmTest">
+            <summary>
+            添加用户请求类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddUserVmTest.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddUserVmTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddUserVmTest.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddUserVmTest.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddUserVmTest.Credit">
+            <summary>
+            学分
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.AddUserVmTest.ClassId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.TestManage.UpdateUserVmTest">
+            <summary>
+            更新用户请求类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.UpdateUserVmTest.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.UpdateUserVmTest.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest">
+            <summary>
+            获取班级用户信息
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.GroupId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.GradeName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.CourseName">
+            <summary>
+            课程名称
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetGroupUserInfoResponseTest.Grade">
+             <summary>
+            成绩
+             </summary>
+        </member>
+        <member name="T:NetByDocker.Model.TestManage.GetUserInfoResponseTest">
+            <summary>
+            获取用户详情返回类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserInfoResponseTest.Id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserInfoResponseTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserInfoResponseTest.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserInfoResponseTest.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest">
+             <summary>
+            获取用户列表
+             </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.Id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.Credit">
+            <summary>
+            学分
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageInfoResponseTest.GroupId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.TestManage.GetUserPageRequestTest">
+            <summary>
+            获取用户分页请求类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.TestManage.GetUserPageRequestTest.Keyword">
+            <summary>
+            关键字  (帐号/名字搜索)
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserinfoVm.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserinfoVm.Birthday">
+            <summary>
+            出生日期
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.UserManage.AddUserVm">
+            <summary>
+            添加用户请求类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserVm.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserVm.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserVm.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserVm.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserVm.Credit">
+            <summary>
+            学分
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.AddUserVm.ClassId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.UserManage.UpdateUserVm">
+            <summary>
+            更新用户请求类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.UpdateUserVm.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.UpdateUserVm.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.UserManage.GetUserInfoResponse">
+            <summary>
+            获取用户详情返回类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserInfoResponse.Id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserInfoResponse.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserInfoResponse.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserInfoResponse.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.UserManage.GetUserPageInfoResponse">
+             <summary>
+            获取用户列表
+             </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.Id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.Credit">
+            <summary>
+            学分
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.ClassName">
+            <summary>
+            班级名称
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageInfoResponse.ClassId">
+            <summary>
+            班级ID
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Model.UserManage.GetUserPageRequest">
+            <summary>
+            获取用户分页请求类
+            </summary>
+        </member>
+        <member name="P:NetByDocker.Model.UserManage.GetUserPageRequest.Keyword">
+            <summary>
+            关键字  (帐号/名字搜索)
+            </summary>
+        </member>
+        <member name="T:NetByDocker.Service.GradeManage.GroupService">
+            <summary>
+            班级服务
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Service.GradeManage.GroupService.GetGroupListAsync">
+            <inheritdoc cref="M:NetByDocker.Service.GradeManage.IGroupService.GetGroupListAsync"/>
+        </member>
+        <member name="M:NetByDocker.Service.GradeManage.GroupService.InitAsync">
+            <inheritdoc cref="M:NetByDocker.Service.GradeManage.IGroupService.InitAsync"/>
+        </member>
+        <member name="T:NetByDocker.Service.GradeManage.IGroupService">
+            <summary>
+            班级服务
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Service.GradeManage.IGroupService.GetGroupListAsync">
+             <summary>
+            获取班级列表返回类
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.GradeManage.IGroupService.InitAsync">
+            <summary>
+            初始化数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NetByDocker.Service.TestManage.ITestService">
+            <summary>
+            测试服务（目的用于演示EFCore基本使用
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.GetBaseInfo(System.String,System.String)">
+            <summary>
+            获取基本信息
+            </summary>
+            <param name="account"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.GetGroupUserListAsync">
+            <summary>
+            获取班级人员信息(三表连接)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.GetPageListAsync(NetByDocker.Model.TestManage.GetUserPageRequestTest)">
+            <summary>
+            分页获取用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.GetDetailsAsync(System.Int64)">
+            <summary>
+            获取详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.AddAsync(NetByDocker.Model.TestManage.AddUserVmTest)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.UpdateAsync(System.Int64,NetByDocker.Model.TestManage.UpdateUserVmTest)">
+            <summary>
+            修改用户
+            </summary>
+            <param name="userId"></param>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.ITestService.DeleteAsync(System.Int64)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NetByDocker.Service.TestManage.TestService">
+            <summary>
+            通过最基础的OpenDbContext实现基本的EFCore使用
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.GetBaseInfo(System.String,System.String)">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.GetBaseInfo(System.String,System.String)"/>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.GetGroupUserListAsync">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.GetGroupUserListAsync"/>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.GetPageListAsync(NetByDocker.Model.TestManage.GetUserPageRequestTest)">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.GetPageListAsync(NetByDocker.Model.TestManage.GetUserPageRequestTest)"/>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.GetDetailsAsync(System.Int64)">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.GetDetailsAsync(System.Int64)"/>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.AddAsync(NetByDocker.Model.TestManage.AddUserVmTest)">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.AddAsync(NetByDocker.Model.TestManage.AddUserVmTest)"/>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.UpdateAsync(System.Int64,NetByDocker.Model.TestManage.UpdateUserVmTest)">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.UpdateAsync(System.Int64,NetByDocker.Model.TestManage.UpdateUserVmTest)"/>
+        </member>
+        <member name="M:NetByDocker.Service.TestManage.TestService.DeleteAsync(System.Int64)">
+            <inheritdoc cref="M:NetByDocker.Service.TestManage.ITestService.DeleteAsync(System.Int64)"/>
+        </member>
+        <member name="T:NetByDocker.Service.UserManage.IUserService">
+            <summary>
+            用户服务接口
+            </summary>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.IUserService.GetPageListAsync(NetByDocker.Model.UserManage.GetUserPageRequest)">
+            <summary>
+            分页获取用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.IUserService.GetDetailsAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            获取详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.IUserService.AddAsync(NetByDocker.Model.UserManage.AddUserVm)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.IUserService.UpdateAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)">
+            <summary>
+            修改用户
+            </summary>
+            <param name="userId"></param>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.IUserService.PatchUpdateAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)">
+            <summary>
+            patch修改用户
+            </summary>
+            <param name="userId"></param>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.IUserService.DeleteAsync(System.Int64)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.UserService.GetPageListAsync(NetByDocker.Model.UserManage.GetUserPageRequest)">
+            <inheritdoc cref="M:NetByDocker.Service.UserManage.IUserService.GetPageListAsync(NetByDocker.Model.UserManage.GetUserPageRequest)"/>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.UserService.GetDetailsAsync(System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:NetByDocker.Service.UserManage.IUserService.GetDetailsAsync(System.Int64,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.UserService.AddAsync(NetByDocker.Model.UserManage.AddUserVm)">
+            <inheritdoc cref="M:NetByDocker.Service.UserManage.IUserService.AddAsync(NetByDocker.Model.UserManage.AddUserVm)"/>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.UserService.PatchUpdateAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)">
+            <inheritdoc cref="M:NetByDocker.Service.UserManage.IUserService.PatchUpdateAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)"/>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.UserService.UpdateAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)">
+            <inheritdoc cref="M:NetByDocker.Service.UserManage.IUserService.UpdateAsync(System.Int64,NetByDocker.Model.UserManage.UpdateUserVm)"/>
+        </member>
+        <member name="M:NetByDocker.Service.UserManage.UserService.DeleteAsync(System.Int64)">
+            <inheritdoc cref="M:NetByDocker.Service.UserManage.IUserService.DeleteAsync(System.Int64)"/>
+        </member>
+    </members>
+</doc>

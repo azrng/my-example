@@ -1,0 +1,35 @@
+name: ASP.NET Core 6.0 Example build and deploy
+  
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: centos
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build package
+      run: dotnet publish ./NetByDocker -c Release -r linux-x64 --self-contained false -o deploy
+      
+    - name: Upload package
+      uses: garygrossgarten/github-action-scp@v0.7.3
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PWD }}
+        port: 22
+        local: /home/runner/work/playground/example/deploy/
+        remote: "/home/project/example/"

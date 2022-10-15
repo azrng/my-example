@@ -1,0 +1,28 @@
+# .gitlab-ci.yml
+variables:
+  ServiceName: $ServiceName
+
+image: docker:latest
+
+stages:
+  - build
+  - deploy
+
+# 任务名称必须唯一，可以自定义，但是不能用保留关键字，例如(stages\stage\script\tags\images\variables等)
+build:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - echo "执行前脚本"
+  script: 
+  	- echo "build job"
+  tags: # 定义了允许执行该任务的gitlab runner，会从所有注册runner的列表中找到标签页定义为docker的runner来执行脚本
+  - docker
+
+depky: 
+  stage: deploy
+  script: 
+    - echo "deploy job"
+  tags: 
+    - docker
