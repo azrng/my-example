@@ -74,9 +74,9 @@ jobs:
           docker login --username=${{ secrets.USERMAME }} --password=${{ secrets.PASSWORD }} registry.cn-hangzhou.aliyuncs.com
           cd NetByDocker
           # 使用Dockerfile构建镜像
-          docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }}
+          docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }}
           # 推送镜像到镜像仓库
-          docker push registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }}
+          docker push registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }}
 
       # 列出所有镜像    
       - name: Docker Images Lst 
