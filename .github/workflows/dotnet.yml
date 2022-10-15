@@ -72,7 +72,7 @@ jobs:
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }} #动态变量镜像TAG 使用github运行job和jobid设置tag
-          context: ./NetByDocker # /home/runner/work/my-example/NetByDocker
+          context: . # /home/runner/work/my-example/NetByDocker
           file: ./NetByDocker/Dockerfile # /home/runner/work/my-example/NetByDocker/Dockerfile # 指定Dockerfile
 
       # 列出所有镜像    
