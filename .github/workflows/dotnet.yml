@@ -2,8 +2,6 @@
 name: Docker
 
 on:
-  #schedule:
-  #  - cron: '30 19 * * *' # 调度器
   push: # 推送的时候触发
     branches: [ "main" ] # 推送的分支
     # Publish semver tags as releases.
@@ -35,14 +33,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3 
 
-      # # 安装辅助工具，pr除外
-      # # https://github.com/sigstore/cosign-installer
-      # - name: Install cosign
-      #   if: github.event_name != 'pull_request'
-      #   uses: sigstore/cosign-installer@f3c664df7af409cb4873aa5068053ba9d61a57b6 #v2.6.0
-      #   with:
-      #     cosign-release: 'v1.11.0'
-
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: login to ${{ env.REGISTRY }}
@@ -53,7 +43,7 @@ jobs:
           username: ${{ secrets.USERMAME }} # 镜像仓库用户名
           password: ${{ secrets.PASSWORD }} # 镜像仓库密码
 
-      # 生成和推送镜像  阿里云推送有问题
+      # 生成和推送镜像  阿里云镜像仓库推送有问题
       # # https://github.com/docker/build-push-action
       # - name: Build and push Docker image
       #   id: build-and-push # 构建docker镜像，推送到自己的docker镜像仓库
@@ -65,7 +55,7 @@ jobs:
       #     push: ${{ github.event_name != 'pull_request' }}
       #     tags: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }} #动态变量镜像TAG 使用github运行job和jobid设置tag
       #     context: . # 相对以远程仓库根路径的dockerfile的路径
-      #     file: ./NetByDocker/Dockerfile # /home/runner/work/my-example/NetByDocker/Dockerfile # 指定Dockerfile
+      #     file: ./NetByDocker/Dockerfile # 指定Dockerfile
 
       - name: Build the Docker image
         run: |
@@ -80,3 +70,12 @@ jobs:
       # 列出所有镜像    
       - name: Docker Images Lst 
         run: docker images
+      
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVERHOST }}
+          username: ${{ secrets.SERVERUSERNAME }}
+          password: ${{ secrets.SERVERPASSWORD }}
+          port: ${{ secrets.SERVERPORT }}
+          script: docker run --name netsample -d -p 8001:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample
