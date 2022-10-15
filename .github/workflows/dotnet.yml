@@ -80,8 +80,8 @@ jobs:
           password: ${{ secrets.SERVERPASSWORD }}
           port: ${{ secrets.SERVERPORT }}
           script: 
-            docker stop $(docker ps --filter ancestor=myexample -q) 
-            docker rm -f $(docker ps -a --filter ancestor=myexample -q) 
-            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}} -q) 
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}  
-            docker run --name netsample -d -p 8002:80 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}} 
+            docker stop $(docker ps --filter ancestor=myexample -q);
+            docker rm -f $(docker ps -a --filter ancestor=myexample -q); 
+            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}} -q);
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}};
+            docker run --name netsample -d -p 8002:80 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}; 
