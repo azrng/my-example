@@ -15,7 +15,7 @@ env:
   # 仓库地址
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   # github.repository as <account>/<repo>
-  IMAGE_NAME: registry.cn-hangzhou.aliyuncs.com/zrng/mssql # 配置的写法 ${{ github.repository }}
+  IMAGE_NAME: zrng/myexample # 配置的写法 ${{ github.repository }}
 
 
 jobs:
@@ -74,7 +74,7 @@ jobs:
           tags: ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }} #动态变量镜像TAG 使用github运行job和jobid设置tag
           context: /home/runner/work/my-example/NetByDocker
           file: /home/runner/work/my-example/NetByDocker/Dockerfile # 指定Dockerfile
-          
+
       # 列出所有镜像    
       - name: Docker Images Lst 
         run: docker images
