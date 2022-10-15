@@ -65,22 +65,22 @@ jobs:
           # 使用Dockerfile构建镜像  ${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }}
           docker build . --file NetByDocker/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
           # 推送镜像到镜像仓库
-          docker push registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}
 
-      # # 列出所有镜像    
-      # - name: Docker Images Lst 
-      #   run: docker images
+      # 列出所有镜像    
+      - name: Docker Images Lst 
+        run: docker images
       
-      # - name: executing remote ssh commands using password
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SERVERHOST }}
-      #     username: ${{ secrets.SERVERUSERNAME }}
-      #     password: ${{ secrets.SERVERPASSWORD }}
-      #     port: ${{ secrets.SERVERPORT }}
-      #     script: # docker run --name netsample -d -p 8002:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
-      #       docker stop $(docker ps --filter ancestor=myexample -q) # 停止容器名字为myexample的容器
-      #       docker rm -f $(docker ps -a --filter ancestor=myexample:${{env.IMAGE_TAG}} -q) # 删除容器名字为myexample的容器
-      #       docker rmi -f $(docker images  ${{ secrets.REGISTRY }}:${{env.IMAGE_TAG}} -q)
-      #       docker pull ${{ secrets.REGISTRY }}:latest
-      #       docker run -d -p 8060:8060 ${{ secrets.REGISTRY }}:${{env.IMAGE_TAG}}       
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVERHOST }}
+          username: ${{ secrets.SERVERUSERNAME }}
+          password: ${{ secrets.SERVERPASSWORD }}
+          port: ${{ secrets.SERVERPORT }}
+          script: # docker run --name netsample -d -p 8002:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
+            docker stop $(docker ps --filter ancestor=myexample -q) # 停止容器名字为myexample的容器
+            docker rm -f $(docker ps -a --filter ancestor=myexample:${{env.IMAGE_TAG}} -q) # 删除容器名字为myexample的容器
+            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}:${{env.IMAGE_TAG}} -q) # 删除镜像
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}  # 拉取镜像
+            docker run --name netsample -d -p 8002:80 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}  # 生成容器
