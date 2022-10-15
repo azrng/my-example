@@ -78,4 +78,4 @@ jobs:
           username: ${{ secrets.SERVERUSERNAME }}
           password: ${{ secrets.SERVERPASSWORD }}
           port: ${{ secrets.SERVERPORT }}
-          script: docker run --name netsample -d -p 8001:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
+          script: docker run --name netsample -d -p 8002:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
