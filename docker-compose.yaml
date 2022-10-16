@@ -3,7 +3,7 @@ version: '3.4'
 services: 
   netsample:
     container_name: netsample
-    image: registry.cn-hangzhou.aliyuncs.com/zrng/myexample:Test
+    image: registry.cn-hangzhou.aliyuncs.com/zrng/myexample
     restart: always
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production

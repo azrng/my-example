@@ -14,7 +14,7 @@ env:
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   # github.repository as <account>/<repo>
   IMAGE_NAME: zrng/myexample # 配置的写法 ${{ github.repository }}
-  IMAGE_TAG: Test
+  IMAGE_TAG: latest
 
 
 jobs:
@@ -63,9 +63,10 @@ jobs:
           # 登录阿里云镜像仓库
           docker login --username=${{ secrets.USERMAME }} --password=${{ secrets.PASSWORD }} registry.cn-hangzhou.aliyuncs.com
           # 使用Dockerfile构建镜像  ${{env.IMAGE_TAG}}.${{ github.run_id }}.${{ github.run_number }}
-          docker build . --file NetByDocker/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}}
+          docker build . --file NetByDocker/Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{env.IMAGE_TAG}} --tag registry.cn-hangzhou.aliyuncs.com/zrng/myexample:${{ github.run_number }}
           # 推送镜像到镜像仓库
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
 
       # 列出所有镜像    
       - name: Docker Images Lst 
@@ -96,4 +97,4 @@ jobs:
           port: ${{ secrets.SERVERPORT }}
           script: 
             cd /root/net;
-            docker-compose up --pull -d;
+            docker-compose pull && docker-compose  up -d;
