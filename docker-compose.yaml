@@ -2,14 +2,15 @@ version: '3.4'
 
 services: 
   netsample:
-    container_name: registry.cn-hangzhou.aliyuncs.com/zrng/myexample:Test
+    container_name: netsample
+    image: registry.cn-hangzhou.aliyuncs.com/zrng/myexample:Test
     restart: always
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
     networks: 
       - my-bridge
     ports: 
-      - "8006:80"
+      - "8002:80"
 
 #网络和services同级别
 networks: 
