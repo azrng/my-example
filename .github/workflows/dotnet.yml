@@ -71,7 +71,22 @@ jobs:
       - name: Docker Images Lst 
         run: docker images
       
-      # docker run --name netsample -d -p 8002:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample:Test
+      # # docker run --name netsample -d -p 8002:80 registry.cn-hangzhou.aliyuncs.com/zrng/myexample:Test
+      # # 该方案启动的时候还需要提前存在这个容器，然后才能让停止以及删除不报错，所以改用其他方法
+      # - name: executing remote ssh commands using password
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.SERVERHOST }}
+      #     username: ${{ secrets.SERVERUSERNAME }}
+      #     password: ${{ secrets.SERVERPASSWORD }}
+      #     port: ${{ secrets.SERVERPORT }}
+      #     script: 
+      #       docker stop $(docker ps --filter ancestor=netsample -q);
+      #       docker rm -f $(docker ps -a --filter ancestor=netsample -q); 
+      #       docker rmi -f $(docker images  ${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}} -q);
+      #       docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}};
+      #       docker run --name netsample -d -p 8002:80 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}; 
+
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
@@ -80,8 +95,4 @@ jobs:
           password: ${{ secrets.SERVERPASSWORD }}
           port: ${{ secrets.SERVERPORT }}
           script: 
-            docker stop $(docker ps --filter ancestor=myexample -q);
-            docker rm -f $(docker ps -a --filter ancestor=myexample -q); 
-            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}} -q);
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}};
-            docker run --name netsample -d -p 8002:80 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.IMAGE_TAG}}; 
+            pwd
