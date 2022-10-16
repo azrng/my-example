@@ -95,4 +95,5 @@ jobs:
           password: ${{ secrets.SERVERPASSWORD }}
           port: ${{ secrets.SERVERPORT }}
           script: 
-            pwd
+            cd /root/net;
+            docker-compose up --build -d;
