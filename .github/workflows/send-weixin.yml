@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: 推送微信消息工作流
 
 on:
   push:
@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: 推送消息
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: curl --location --request POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=&{{secrets.WEIXINKEY}}' --header 'Content-Type: application/json' --header 'Accept: */*' --header 'Cache-Control: no-cache' --header 'Host: qyapi.weixin.qq.com' --header 'Connection: keep-alive' --data-raw '{"msgtype":"text","text":{"content":"测试"}}'
